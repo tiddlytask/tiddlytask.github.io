@@ -141,7 +141,13 @@ Error message and password prompt
 
 <p>This <a class="tc-tiddlylink-external" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p><p><ul>
 
+<li>$:/.mr/kookma/stylesheet/tw-version</li>
+
+<li>$:/.tb/modules/startup/hide-sidebar.js</li>
+
 <li>$:/build</li>
+
+<li>$:/config/HideSidebarOnStartup</li>
 
 <li>$:/config/Manager/Filter</li>
 
@@ -211,9 +217,13 @@ Error message and password prompt
 
 <li>$:/isEncrypted</li>
 
+<li>$:/language/Snippets/ListByTag</li>
+
 <li>$:/palette</li>
 
 <li>$:/pluginlibrary/tobibeer/official</li>
+
+<li>$:/plugins/kookma/favorites</li>
 
 <li>$:/plugins/tiddlywiki/highlight</li>
 
@@ -235,6 +245,8 @@ Error message and password prompt
 
 <li>$:/state/ShowPaletteEditor</li>
 
+<li>$:/state/sidebar</li>
+
 <li>$:/state/tab--1498284803</li>
 
 <li>$:/state/tab--1963855381</li>
@@ -253,6 +265,8 @@ Error message and password prompt
 
 <li>$:/StoryList</li>
 
+<li>$:/tags/TextEditor/Snippet</li>
+
 <li>$:/themes/tiddlywiki/snowwhite</li>
 
 <li>$:/themes/tiddlywiki/vanilla</li>
@@ -263,9 +277,17 @@ Error message and password prompt
 
 <li>$:/view</li>
 
+<li>Add preview &amp; drag/drop to kanban</li>
+
+<li>Button New Task</li>
+
+<li>Custom Checkbox Style</li>
+
 <li>doing</li>
 
 <li>done</li>
+
+<li>exemple task-control</li>
 
 <li>Home</li>
 
@@ -277,6 +299,8 @@ Error message and password prompt
 
 <li>LTg#</li>
 
+<li>macro task-control</li>
+
 <li>Q&amp;A</li>
 
 <li>Random tiddler by tag</li>
@@ -284,6 +308,8 @@ Error message and password prompt
 <li>stats</li>
 
 <li>style</li>
+
+<li>Style Buttons</li>
 
 <li>Style Dark mode</li>
 
@@ -301,7 +327,7 @@ Error message and password prompt
 
 <li>Style List</li>
 
-<li>Style Tiddlytask Color Palettes</li>
+<li>Style Tiddlytask Color Palette</li>
 
 <li>Style Tiddlytask Symbols</li>
 
@@ -309,7 +335,19 @@ Error message and password prompt
 
 <li>tags</li>
 
+<li>task-control</li>
+
+<li>task-control snippet</li>
+
 <li>Templates</li>
+
+<li>Test date</li>
+
+<li>tests : tag in tiddler body</li>
+
+<li>Tg</li>
+
+<li>Tiddlytask</li>
 
 <li>todo</li>
 
@@ -331,9 +369,56 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
+<div created="20180906042308596" creator="Mohammad" modified="20210315153216826" modifier="user" tags="kookma $:/tags/Stylesheet TW5" title="$:/.mr/kookma/stylesheet/tw-version" type="application/x-tiddler">
+<pre>&lt;pre&gt;/* TW-version added to site title */
+.tc-site-title:before {
+  content:&quot;TW &lt;&lt;version&gt;&gt;&quot;;
+  position:absolute;
+  margin-top:-1.9em;
+  color:silver;
+  font-size:13px;
+}
+&lt;/pre&gt;</pre>
+</div>
+<div bag="default" created="20151010151732122" creator="Tobias Beer" modified="20210315153736385" modifier="user" module-type="startup" revision="0" tags="hidesidebaronstartup TW5" title="$:/.tb/modules/startup/hide-sidebar.js" type="application/javascript">
+<pre>/*\
+title: $:/.tb/modules/startup/hide-sidebar.js
+type: application/javascript
+module-type: startup
+created: 20151010151732122
+creator: Tobias Beer
+modified: 20151010151750739
+
+Hides the sidebar on startup when the config tiddler [[$:/config/hide-sidebar-on-startup]] contains &quot;yes&quot;
+
+\*/
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+&quot;use strict&quot;;
+
+// Export name and synchronous status
+exports.name = &quot;hide-sidebar-on-startup&quot;;
+exports.platforms = [&quot;browser&quot;];
+exports.after = [&quot;startup&quot;];
+exports.synchronous = true;
+
+exports.startup = function() {
+	var conf = $tw.wiki.getTiddler(&quot;$:/config/HideSidebarOnStartup&quot;),
+		value = (conf ? conf.getFieldString(&quot;text&quot;) : &quot;&quot;).toLowerCase(),
+		state = value == &quot;yes&quot; ? &quot;no&quot; : &quot;yes&quot;;
+	$tw.wiki.setText(&quot;$:/state/sidebar&quot;, &quot;text&quot;, undefined, state);
+};
+
+})();</pre>
+</div>
 <div commit="ce8c03250cc2307fa12a992176629140c8391ab7" title="$:/build">
 <pre>Built from branch 'tiddlywiki-com' at commit ce8c03250cc2307fa12a992176629140c8391ab7 of https://github.com/Jermolene/TiddlyWiki5 at 2021-01-15 16:54:09 UTC
 </pre>
+</div>
+<div bag="default" created="20151007165524815" creator="Tobias Beer" modified="20210315153922312" modifier="user" revision="0" tags="TW5 hidesidebaronstartup" title="$:/config/HideSidebarOnStartup" type="text/vnd.tiddlywiki">
+<pre>yes</pre>
 </div>
 <div created="20210126235358045" modified="20210129170920327" title="$:/config/Manager/Filter">
 <pre>Thought experiment</pre>
@@ -10274,8 +10359,9 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20201112214905448" creator="user" modified="20210201132305813" modifier="user" title="$:/DefaultTiddlers">
-<pre>Home</pre>
+<div created="20201112214905448" creator="user" modified="20210305113749049" modifier="user" title="$:/DefaultTiddlers">
+<pre>Home
+Kanban</pre>
 </div>
 <div created="20201112221449079" modified="20201112221450744" title="$:/GitHub/Branch">
 <pre>main</pre>
@@ -10289,22 +10375,274 @@ Error message and password prompt
 <div created="20201112221014456" creator="user" modified="20210304154557625" modifier="user" title="$:/GitHub/Repo">
 <pre>tiddlytask/tiddlytask.github.io</pre>
 </div>
-<div created="20201112220827768" creator="user" modified="20210304154649667" modifier="user" title="$:/GitHub/Username">
+<div created="20201112220827768" creator="user" modified="20210320154800446" modifier="user" title="$:/GitHub/Username">
 <pre>tiddlytask</pre>
 </div>
 <div status="complete" title="$:/Import">
 <pre>The following tiddlers were imported:
 
-# [[Style Videos]]</pre>
+# [[$:/.tb/modules/startup/hide-sidebar.js]]
+# [[$:/config/HideSidebarOnStartup]]</pre>
 </div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
+</div>
+<div caption="List of tiddlers by tag" created="20210305114154255" creator="user" modified="20210318234511627" modifier="user" tags="$:/tags/TextEditor/Snippet" title="$:/language/Snippets/ListByTag">
+<pre>{{||LTg}}</pre>
 </div>
 <div created="20210126154217611" modified="20210126154544919" title="$:/palette">
 <pre>$:/palettes/Twilight</pre>
 </div>
 <div bag="default" caption="Official Plugin Library by Tobias Beer" modified="20160120132137178" modifier="Tobias Beer" revision="0" tags="$:/tags/PluginLibrary" title="$:/pluginlibrary/tobibeer/official" url="http://tobibeer.github.io/tw5-plugins/library/index.html">
 <pre>The plugin library for the latest and greatest plugins from [ext[tobibeer/plugins|http://tobibeer.github.io/tw5-plugins]]; officially released versions of plugins by [ext[tobibeer|https://github.com/tobibeer]].</pre>
+</div>
+<div author="Mohammad Rahmani" core-version="&gt;=5.1.22" dependents="" description="Favorites" list="readme history license" plugin-type="plugin" source="https://github.com/kookma/TW-Favorites" title="$:/plugins/kookma/favorites" type="application/json" version="4.4.0">
+<pre>{
+    &quot;tiddlers&quot;: {
+        &quot;$:/plugins/kookma/favorites/frozen-list&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/frozen-list&quot;,
+            &quot;caption&quot;: &quot;Favorites&quot;,
+            &quot;created&quot;: &quot;20191228192318272&quot;,
+            &quot;list-after&quot;: &quot;$:/core/ui/SideBar/Open&quot;,
+            &quot;modified&quot;: &quot;20200326083226904&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\import $:/plugins/kookma/favorites/macros/definition\n\\import $:/plugins/kookma/favorites/macros/slider\n\n\\define contents()\n&lt;div style=\&quot;padding-left:20px;\&quot;&gt;\n&lt;$list filter=\&quot;[list&lt;currentTiddler&gt;]\&quot;&gt;\n&lt;$transclude tiddler=\&quot;$:/plugins/kookma/favorites/templates/show-link\&quot; field=text/&gt;\n&lt;/$list&gt;\n&lt;/div&gt;\n\\end\n\n\n&lt;$list filter=&lt;&lt;recentlyAdded&gt;&gt; &gt;\n&lt;div&gt;&lt;&lt;contents&gt;&gt;\n&lt;/div&gt;\n&lt;/$list&gt;\n\n\n&lt;$list filter=\&quot;[subfilter&lt;folders&gt;]-[&lt;recentlyAdded&gt;]\&quot; &gt;\n&lt;div&gt;\n&lt;$macrocall $name=favslider\ntitle=&lt;&lt;currentTiddler&gt;&gt;\ncontent=&lt;&lt;contents&gt;&gt;\n/&gt;&lt;/div&gt;\n&lt;/$list&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/history&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/history&quot;,
+            &quot;created&quot;: &quot;20200326073607951&quot;,
+            &quot;modified&quot;: &quot;20200326080816159&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;Full change log  https://kookma.github.io/TW-Favorites/#ChangeLog\n\n* ''4.4.0 '' -- 2020.03.26 -- moved to new Thirdflow development platform \n* ''4.3.0 '' -- 2019.11.19 -- correct caption when caption filed has wikitext\n* ''4.0.0 '' -- 2019.12.17 -- a rewrite of old favorite plugin\n* ''3.0.12'' -- 2018.11.01 -- released by Mohammad Rahmani\n* ''3.0.5 '' -- 2017.08.03 -- released by Andrew Harrison&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/image&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/image&quot;,
+            &quot;created&quot;: &quot;20181010141333403&quot;,
+            &quot;modified&quot;: &quot;20200326185558195&quot;,
+            &quot;path&quot;: &quot;c-3.3-16.6-15.1-27.3-30.3-27.3-8.5,0-17.7,3.5-26.7,10.1-9.1-6.8-18.3-10.3-26.9-10.3-15.2,0-27.1,10.8-30.3,27.6-4.8,24.9 10.6,58 55.7,76 0.5,0.2 1,0.3 1.5,0.3 0.5,0 1-0.1 1.5-0.3 45-18.4 60.3-51.4 55.5-76.1zm-57,67.9c-39.6-16.4-53.3-45-49.2-66.3 2.4-12.7 11.2-21 22.3-21 7.5,0 15.9,3.6 24.3,10.5 1.5,1.2 3.6,1.2 5.1,0 8.4-6.7 16.7-10.2 24.2-10.2 11.1,0 19.8,8.1 22.3,20.7 4.1,21.1-9.5,49.6-49,66.3z&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Image&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define favorites-svg()\n&lt;svg class='tc-image-favorites-button tc-image-button' width='22pt' height='22pt' viewBox=\&quot;0 0 129 129\&quot;&gt;&lt;g&gt;&lt;path stroke-width=\&quot;6px\&quot;   d='m$(m)$$(path)$'/&gt;&lt;/g&gt;&lt;/svg&gt;\n\\end\n\n&lt;$vars m='121.6,40.1' path={{!!path}}&gt;\n&lt;&lt;favorites-svg&gt;&gt;\n&lt;/$vars&gt;&quot;
+        },
+        &quot;$:/language/Buttons/Favorites/Caption/Add&quot;: {
+            &quot;title&quot;: &quot;$:/language/Buttons/Favorites/Caption/Add&quot;,
+            &quot;created&quot;: &quot;20191216200037937&quot;,
+            &quot;modified&quot;: &quot;20200326193233403&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;favorites&quot;
+        },
+        &quot;$:/language/Buttons/Favorites/Caption/Remove&quot;: {
+            &quot;title&quot;: &quot;$:/language/Buttons/Favorites/Caption/Remove&quot;,
+            &quot;created&quot;: &quot;20191216200037793&quot;,
+            &quot;modified&quot;: &quot;20200326193156596&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;Caption/Remove&quot;
+        },
+        &quot;$:/language/Buttons/Favorites/Hint/Add&quot;: {
+            &quot;title&quot;: &quot;$:/language/Buttons/Favorites/Hint/Add&quot;,
+            &quot;created&quot;: &quot;20191216200037919&quot;,
+            &quot;modified&quot;: &quot;20200326193116928&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;Add to favorites&quot;
+        },
+        &quot;$:/language/Buttons/Favorites/Hint/Remove&quot;: {
+            &quot;title&quot;: &quot;$:/language/Buttons/Favorites/Hint/Remove&quot;,
+            &quot;created&quot;: &quot;20200326193045794&quot;,
+            &quot;modified&quot;: &quot;20200326193104571&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;Remove from favorites&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/license&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/license&quot;,
+            &quot;created&quot;: &quot;20200326073607952&quot;,
+            &quot;modified&quot;: &quot;20200326080900832&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;Distributed under an MIT license.\n\nCopyright (c) 2018-2020 [[Mohammad Rahmani|https://github.com/kookma]]&lt;br&gt;\nCopyright (c) 2017-2018 [[Andrew Harrison|http://favorites.tiddlyspot.com/]]\n\n&lt;&lt;&lt;\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \&quot;Software\&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \&quot;AS IS\&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n&lt;&lt;&lt;\n&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/macros/combo-search&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/macros/combo-search&quot;,
+            &quot;created&quot;: &quot;20191219070911471&quot;,
+            &quot;description&quot;: &quot;do not delete, part of example 103&quot;,
+            &quot;modified&quot;: &quot;20200326190600963&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define standardSearch() [list&lt;favlistTid&gt;search&lt;searchTerms&gt;]\n\\define filterSearch()   [list&lt;favlistTid&gt;]+[subfilter&lt;searchTerms&gt;]\n\n\\define displayResult(filter)\n&lt;!-- other folders --&gt;\n&lt;$list filter=\&quot;[&lt;recentlyAdded&gt;]\&quot; variable=folder&gt;\n&lt;b&gt;&lt;$view tiddler=&lt;&lt;folder&gt;&gt; field=caption/&gt;&lt;/b&gt;&lt;br&gt;\n&lt;$list filter=&lt;&lt;__filter__&gt;&gt; variable=item &gt;\n&lt;$list filter=\&quot;[&lt;folder&gt;search:list&lt;item&gt;]\&quot;&gt;\n&lt;span style=\&quot;margin-left:8px;\&quot;&gt;&lt;$link to=&lt;&lt;item&gt;&gt;/&gt;&lt;/span&gt;&lt;br&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n\n&lt;!-- other folders --&gt;\n&lt;$list filter=\&quot;[subfilter&lt;folders&gt;]-[&lt;recentlyAdded&gt;]\&quot; variable=folder&gt;\n&lt;b&gt;&lt;$view tiddler=&lt;&lt;folder&gt;&gt; field=caption/&gt;&lt;/b&gt;&lt;br&gt;\n&lt;$list filter=&lt;&lt;__filter__&gt;&gt; variable=item &gt;\n&lt;$list filter=\&quot;[&lt;folder&gt;search:list&lt;item&gt;]\&quot;&gt;\n&lt;span style=\&quot;margin-left:8px;\&quot;&gt;&lt;$link to=&lt;&lt;item&gt;&gt;/&gt;&lt;/span&gt;&lt;br&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n\\end\n\n\n\\define combo-search(stateTiddler:\&quot;\&quot;)\n&lt;$vars pattern=\&quot;^\\[\&quot;\n       stateTid={{{ [[$:/temp/combosearch/]addsuffix[$stateTiddler$]addsuffix&lt;qualify&gt;] }}}&gt;\t \n&lt;!--UI --&gt;\n&lt;div class=\&quot;tc-search tc-advanced-search\&quot;&gt;\n&lt;$edit-text tiddler=&lt;&lt;stateTid&gt;&gt; tag=input default=\&quot;\&quot; placeholder=\&quot;search by keyword or filter\&quot; class=\&quot;sltext\&quot;/&gt;\t\t\t\n\n&lt;!-- show results if any--&gt;\n&lt;$reveal state=&lt;&lt;stateTid&gt;&gt; type=\&quot;nomatch\&quot; text=\&quot;\&quot;&gt;&lt;!--do not display when searchbox is empty--&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;\n&lt;$action-setfield $tiddler=&lt;&lt;stateTid&gt;&gt; $field=\&quot;text\&quot; $value=\&quot;\&quot;/&gt;\n{{$:/core/images/close-button}}\n&lt;/$button&gt;\n\n&lt;$set name=searchTerms tiddler=&lt;&lt;stateTid&gt;&gt; field=text&gt;\n\n&lt;$list filter=\&quot;[&lt;searchTerms&gt;trim[]minlength[3]limit[1]]\&quot; emptyMessage=\&quot;Search text too short\&quot; variable=ignore&gt;\n\n&lt;!-- Check input search term --&gt;\n&lt;div class=\&quot;tc-search-results\&quot;&gt;\n&lt;$list filter=\&quot;[&lt;searchTerms&gt;regexp&lt;pattern&gt;then[filterSearch]else[standardSearch]]\&quot; variable=searchMethod &gt;\n&lt;$reveal type=nomatch default=\&quot;filterSearch\&quot; text=&lt;&lt;searchMethod&gt;&gt; &gt;\n&lt;$macrocall $name=displayResult filter=&lt;&lt;standardSearch&gt;&gt; /&gt;\n&lt;/$reveal&gt;\n&lt;$reveal type=match default=\&quot;filterSearch\&quot; text=&lt;&lt;searchMethod&gt;&gt; &gt;\n&lt;$macrocall $name=displayResult filter=&lt;&lt;filterSearch&gt;&gt; /&gt;\n&lt;/$reveal&gt;\n\n&lt;/$list&gt;\n&lt;/div&gt;\n&lt;/$list&gt;\n&lt;/$set&gt;\n&lt;/$reveal&gt;\n&lt;/div&gt;\n&lt;/$vars&gt;\n\\end&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/macros/definition&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/macros/definition&quot;,
+            &quot;created&quot;: &quot;20191223204533023&quot;,
+            &quot;modified&quot;: &quot;20200326190417057&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define folderpath()     $:/favorites/folder\n\\define favlistTid()     $:/favorites/favlist\n\\define foldertagTid()   $:/tags/Favorites/Folder\n\\define folders()        [tag[$(foldertagTid)$]]\n\\define recentlyAdded()  $:/plugins/kookma/favorites/recent\n\n\\define temppath()       $:/temp/favorites\n\n\\define selectionTid()   $(temppath)$/selection\n\\define tempNewTid()     $(temppath)$/new-folder\n\\define temppopupTid()   $(temppath)$/delete-confirm\n\\define tempreorderTid() $(temppath)$/reorder\n\\define saveTid()        $(temppath)$/savetitle&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/macros/folding-editor&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/macros/folding-editor&quot;,
+            &quot;created&quot;: &quot;20191222134036727&quot;,
+            &quot;modified&quot;: &quot;20200326083226990&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Macro&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define fv-folding-editor(tiddler)\n&lt;$set name=\&quot;state\&quot; value={{{ [[$:/temp/folding-editor/]addsuffix&lt;currentTiddler&gt;addsuffix&lt;__tiddler__&gt;] }}}&gt;\n&lt;$reveal stateTitle=&lt;&lt;state&gt;&gt; type=\&quot;nomatch\&quot; text=\&quot;edit\&quot;&gt;\n&lt;span style=\&quot;display:inline-block;min-width:320px;font-weight:700\&quot;&gt;\n&lt;$transclude tiddler=&lt;&lt;__tiddler__&gt;&gt; field=\&quot;caption\&quot;/&gt;\n&lt;/span&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot; setTitle=&lt;&lt;state&gt;&gt; setTo=\&quot;edit\&quot;&gt;{{$:/core/images/edit-button}}&lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;$reveal stateTitle=&lt;&lt;state&gt;&gt; type=\&quot;match\&quot; text=\&quot;edit\&quot;&gt;\n&lt;$edit-text class=\&quot;\&quot; tiddler=&lt;&lt;__tiddler__&gt;&gt; field=\&quot;caption\&quot; tag=\&quot;input\&quot; default=\&quot;\&quot; placeholder=\&quot;enter a folder title\&quot;/&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot; setTitle=&lt;&lt;state&gt;&gt; setTo=\&quot;\&quot;&gt;{{$:/core/images/done-button}}&lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;/$set&gt;&lt;span class=\&quot;fv-folding-button\&quot;&gt;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt; {{$:/core/images/delete-button}}\n&lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;-[list&lt;__tiddler__&gt;]\&quot; /&gt;\n&lt;$action-listops $tiddler=&lt;&lt;foldertagTid&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;-[[$tiddler$]]\&quot; /&gt;\n&lt;$action-deletetiddler $tiddler=&lt;&lt;__tiddler__&gt;&gt;/&gt;\n&lt;/$button&gt;\n&lt;$radio tiddler=&lt;&lt;tempreorderTid&gt;&gt; field=text value=&lt;&lt;__tiddler__&gt;&gt;/&gt;\n&lt;/span&gt;\n\\end\n&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/macros/sidebar&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/macros/sidebar&quot;,
+            &quot;caption&quot;: &quot;Favorites&quot;,
+            &quot;created&quot;: &quot;20191226064633412&quot;,
+            &quot;list-before&quot;: &quot;$:/core/ui/SideBar/Recent&quot;,
+            &quot;modified&quot;: &quot;20200326190524020&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\whitespace trim\n\\import $:/plugins/kookma/favorites/macros/slider\n\\import $:/plugins/kookma/favorites/macros/definition\n\n\\define drop-actions()\n&lt;!-- case 1: tiddler is already in favlist and moved between folders by drag and drop --&gt;\n&lt;$reveal type=match default=&lt;&lt;favlistTid&gt;&gt; text={{{[&lt;actionTiddler&gt;listed[]match&lt;favlistTid&gt;]}}} &gt;\n&lt;$vars oldFolder={{{ [&lt;actionTiddler&gt;listed[]]+[subfilter&lt;folders&gt;]-[&lt;folder&gt;]+[limit[1]] }}}&gt;\n&lt;$action-listops $tiddler=&lt;&lt;oldFolder&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;-[&lt;actionTiddler&gt;]\&quot; /&gt;\n&lt;/$vars&gt;\n&lt;/$reveal&gt;\n&lt;!-- case 2: tiddler is NOT already in favlist and dropped from outside favorites --&gt;\n&lt;$reveal type=nomatch default=&lt;&lt;favlistTid&gt;&gt; text={{{[&lt;actionTiddler&gt;listed[]match&lt;favlistTid&gt;]}}} &gt;\n&lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt; $field='list' $subfilter=\&quot;[&lt;actionTiddler&gt;]\&quot;/&gt;\n&lt;/$reveal&gt;\n&lt;!-- move it to the target folder --&gt;\n&lt;$action-listops $tiddler=&lt;&lt;folder&gt;&gt; $subfilter=\&quot;+[insertbefore:currentTiddler&lt;actionTiddler&gt;]\&quot;/&gt;\n\\end\n\n\\define placeholder()\n&lt;div class=\&quot;tc-droppable-placeholder\&quot;&gt;&amp;nbsp;&lt;/div&gt;\n\\end\n\n\\define droppable-item()\n\\whitespace trim\n&lt;$droppable actions=&lt;&lt;drop-actions&gt;&gt;&gt;\n&lt;&lt;placeholder&gt;&gt;\n&lt;div&gt;\n&lt;$transclude tiddler=\&quot;$:/plugins/kookma/favorites/templates/delete-item\&quot; field=text/&gt; \n&lt;$transclude tiddler=\&quot;$:/plugins/kookma/favorites/templates/show-link\&quot; field=text/&gt;\n&lt;/div&gt;\n&lt;/$droppable&gt;\n\\end\n\n\\define droppable-item-after-last-item()\n\\whitespace trim\n&lt;!--add extra space for drag and drop after last item--&gt;\n&lt;$droppable actions=&lt;&lt;drop-actions&gt;&gt;&gt;\n&lt;&lt;placeholder&gt;&gt;&lt;div style=\&quot;margin-top:-6px;margin-bottom:-6px;\&quot;&gt;&amp;nbsp;&lt;/div&gt;\n&lt;/$droppable&gt;\n\\end\n\n\n\\define display-folder-is-empty()\n&lt;div style=\&quot;padding-left:20px;\&quot;&gt;\n&lt;$droppable actions=&lt;&lt;drop-actions&gt;&gt;&gt;\n&lt;&lt;placeholder&gt;&gt;\n//Folder is empty//\n&lt;/$droppable&gt;\n&lt;/div&gt;\n\\end\n\n\\define display-fav-folder(folder)\n&lt;$vars folder=&lt;&lt;__folder__&gt;&gt; &gt;\n&lt;!--check if folder is empty--&gt;\n&lt;$list filter=\&quot;[list&lt;folder&gt;limit[1]]\&quot; emptyMessage=&lt;&lt;display-folder-is-empty&gt;&gt; variable=ignore&gt;\n&lt;div style=\&quot;padding-left:20px;\&quot;&gt;\n&lt;$list filter=\&quot;[list&lt;folder&gt;]\&quot;&gt;&lt;!--display all tiddlers in folder list field one by one --&gt;\n&lt;$list filter=\&quot;[&lt;favlistTid&gt;contains&lt;currentTiddler&gt;]\&quot; variable=ignore&gt;&lt;!--check if the tiddler is a favorite list--&gt;\n&lt;$macrocall $name=droppable-item /&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n&lt;&lt;droppable-item-after-last-item&gt;&gt;\n&lt;/div&gt;\n&lt;/$list&gt;\n&lt;/$vars&gt;\n\\end\n\n\\define display-fav-recentlyAdded()\n&lt;$vars folder=&lt;&lt;recentlyAdded&gt;&gt; &gt;\n&lt;b&gt;&lt;$transclude tiddler=&lt;&lt;folder&gt;&gt; field=\&quot;caption\&quot; /&gt;&lt;/b&gt;\n&lt;!--check if favlistTid is empty --&gt;\n&lt;$list filter=\&quot;[list&lt;folder&gt;limit[1]]\&quot; emptyMessage=&lt;&lt;display-folder-is-empty&gt;&gt; variable=ignore&gt;\n&lt;div style=\&quot;padding-left:20px;\&quot;&gt;\n&lt;$list filter=\&quot;[list&lt;folder&gt;]\&quot;&gt;&lt;!--get all items in favlistTid--&gt;\n&lt;$list filter=\&quot;[&lt;favlistTid&gt;contains&lt;currentTiddler&gt;]\&quot; variable=ignore&gt;&lt;!--check if the tiddler is a favorite list--&gt;\n&lt;$macrocall $name=droppable-item /&gt;\n&lt;/$list&gt;\n&lt;/$list&gt;\n&lt;&lt;droppable-item-after-last-item&gt;&gt;\n&lt;/div&gt;\n&lt;/$list&gt;\n&lt;/$vars&gt;\n\\end\n\n\n\\define favorites-tree()\n&lt;!--show recently added favorites --&gt;\n&lt;&lt;display-fav-recentlyAdded&gt;&gt;\n\n&lt;!-- show all favorite folders --&gt;\n&lt;$list filter=\&quot;[subfilter&lt;folders&gt;]-[&lt;recentlyAdded&gt;]\&quot;  variable=favfolder &gt;\n&lt;div&gt;&lt;!--create a div for each folder--&gt;\n&lt;$macrocall $name=favslider\n  title=&lt;&lt;favfolder&gt;&gt; \n  content=\&quot;\&quot;\&quot;&lt;$macrocall $name=\&quot;display-fav-folder\&quot; folder=&lt;&lt;favfolder&gt;&gt; /&gt;\&quot;\&quot;\&quot; /&gt;\n&lt;/div&gt;\n&lt;/$list&gt;\n\\end\n&lt;!-- create the favorite tree --&gt;\n&lt;&lt;favorites-tree&gt;&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/macros/slider&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/macros/slider&quot;,
+            &quot;created&quot;: &quot;20191220123602267&quot;,
+            &quot;modified&quot;: &quot;20200326190213819&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define favslider(title, content)\n&lt;$set name=\&quot;revealState\&quot; filter={{{ [[$:/temp/favorits/]addsuffix&lt;__title__&gt;addsuffix&lt;qualify&gt;] }}}&gt;\n&lt;$reveal type=\&quot;nomatch\&quot; state=&lt;&lt;revealState&gt;&gt; text=\&quot;yes\&quot;&gt;\n    &lt;$button class=\&quot;tc-btn-invisible tc-tiddlylink\&quot; set=&lt;&lt;revealState&gt;&gt; setTo=\&quot;yes\&quot; &gt;\n      {{$:/core/images/right-arrow}}\n    &lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;$reveal type=\&quot;match\&quot; state=&lt;&lt;revealState&gt;&gt; text=\&quot;yes\&quot;&gt;\n    &lt;$button class=\&quot;tc-btn-invisible tc-tiddlylink\&quot; set=&lt;&lt;revealState&gt;&gt; setTo=\&quot;no\&quot; &gt;\n      {{$:/core/images/down-arrow}}\n    &lt;/$button&gt;\n&lt;/$reveal&gt;\n&lt;$list filter=\&quot;[&lt;fv-config-buttons&gt;match[yes]]\&quot; \n  emptyMessage=\&quot;\&quot;\&quot;&lt;b&gt;&lt;$transclude tiddler=&lt;&lt;__title__&gt;&gt; field=\&quot;caption\&quot;/&gt;&lt;/b&gt;\&quot;\&quot;\&quot;\n\tvariable=ignore&gt;\n  &lt;$macrocall $name=\&quot;fv-folding-editor\&quot; tiddler=&lt;&lt;__title__&gt;&gt; /&gt;\n&lt;/$list&gt;\n&lt;$reveal type=\&quot;match\&quot; state=&lt;&lt;revealState&gt;&gt; text=\&quot;yes\&quot;&gt;\n$content$\n&lt;/$reveal&gt;\n&lt;/$set&gt;\n\\end&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager/export&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager/export&quot;,
+            &quot;caption&quot;: &quot;Export&quot;,
+            &quot;created&quot;: &quot;20191226173845382&quot;,
+            &quot;modified&quot;: &quot;20200326083227031&quot;,
+            &quot;tags&quot;: &quot;$:/favorites/Manager&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\import $:/plugins/kookma/favorites/macros/definition\n\\define lingo-base() $:/language/Search/\n\nExport and delete favorites\n\n&lt;$vars selection={{{ [&lt;selectionTid&gt;get[text]] }}} &gt;\n\n&lt;div class=\&quot;tc-search tc-advanced-search fv-form\&quot;&gt;\n&lt;$select tiddler=&lt;&lt;selectionTid&gt;&gt; class=\&quot;sltext\&quot; field=\&quot;text\&quot; default=\&quot;message\&quot;&gt;\n&lt;option value=\&quot;message\&quot; disabled selected&gt;Select a folder&lt;/option&gt;\n&lt;$list filter=&lt;&lt;folders&gt;&gt; &gt;\n&lt;option value=&lt;&lt;currentTiddler&gt;&gt;&gt;&lt;$transclude field=caption/&gt;&lt;/option&gt;\n&lt;/$list&gt;\n&lt;$list filter=\&quot;[subfilter&lt;folders&gt;count[]!match[0]]\&quot;&gt;\n&lt;option disabled&gt;&amp;#9472;&amp;#9472;&amp;#9472;&amp;#9472;&amp;#9472;&lt;/option&gt;\n&lt;option value=\&quot;$:/favorites/favlist\&quot; style=\&quot;font-weight:500;\&quot;&gt;all favorites&lt;/option&gt;\n&lt;/$list&gt;\n&lt;/$select&gt;\n&lt;$list filter=\&quot;[all[shadows+tiddlers]prefix[$:/plugins/kookma/favorites/manager/exptab]!has[draft.of]]\&quot;&gt;&lt;$transclude/&gt;&lt;/$list&gt;\n&lt;/div&gt;\n\n&lt;$set name=\&quot;resultCount\&quot; value=\&quot;\&quot;\&quot;&lt;$count filter=\&quot;[list&lt;selection&gt;]\&quot;/&gt;\&quot;\&quot;\&quot;&gt;\n&lt;div class=\&quot;tc-search-results\&quot;&gt;\n&lt;&lt;lingo Filter/Matches&gt;&gt;\n&lt;$list filter=\&quot;[list&lt;selection&gt;]\&quot; template=\&quot;$:/core/ui/ListItemTemplate\&quot;/&gt;\n&lt;/div&gt;\n&lt;/$set&gt;\n\n&lt;/$vars&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager/exptab-delete&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager/exptab-delete&quot;,
+            &quot;created&quot;: &quot;20191226172205238&quot;,
+            &quot;modified&quot;: &quot;20200326190524040&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;$reveal type=nomatch default=\&quot;0\&quot; text={{{[list&lt;selection&gt;count[]]}}} &gt;&lt;!--display button if there is a result--&gt;\n&lt;$button popup=&lt;&lt;qualify $(temppopupTid)$&gt;&gt; class=\&quot;tc-btn-invisible\&quot; tooltip=\&quot;delete tiddlers\&quot;&gt;\n{{$:/core/images/delete-button}}\n&lt;/$button&gt;\n&lt;/$reveal&gt;\n\n&lt;$reveal state=&lt;&lt;qualify $(temppopupTid)$&gt;&gt; type=\&quot;popup\&quot; position=\&quot;belowleft\&quot; animate=\&quot;yes\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown-wrapper\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown tc-edit-type-dropdown\&quot;&gt;\n&lt;div class=\&quot;tc-dropdown-item-plain\&quot;&gt;\n&lt;$set name=\&quot;resultCount\&quot; value=\&quot;\&quot;\&quot;&lt;$count filter=\&quot;[list&lt;selection&gt;]\&quot;/&gt;\&quot;\&quot;\&quot;&gt;\nAre you sure you wish to delete permanently &lt;&lt;resultCount&gt;&gt; tiddler(s)?\n&lt;/$set&gt;\n&lt;/div&gt;\n&lt;div class=\&quot;tc-dropdown-item-plain\&quot;&gt;\n&lt;$button class=\&quot;tc-button tt-button\&quot;&gt; delete\n   &lt;$action-deletetiddler $filter=\&quot;[list&lt;selection&gt;]\&quot; /&gt;\n\t &lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt; $field='list' $subfilter=\&quot;-[list&lt;selection&gt;]\&quot;/&gt;\n\t &lt;$action-listops $tiddler=&lt;&lt;selection&gt;&gt; $field='list'  $subfilter=\&quot;-[list&lt;selection&gt;]\&quot;/&gt;\n&lt;/$button&gt;\n&lt;/div&gt;\n&lt;/div&gt;\n&lt;/div&gt;\n&lt;/$reveal&gt;\n&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager/exptab-export&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager/exptab-export&quot;,
+            &quot;created&quot;: &quot;20191226172145394&quot;,
+            &quot;modified&quot;: &quot;20200326190524050&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define export-favorites()\n&lt;$reveal type=nomatch default=\&quot;0\&quot; text={{{[list&lt;selection&gt;count[]]}}} &gt;&lt;!--display button if there is a result--&gt;\n&lt;$macrocall $name=\&quot;exportButton\&quot;   exportFilter=\&quot;[list[$(selection)$]]\&quot; lingoBase=\&quot;$:/language/Buttons/ExportTiddlers/\&quot; baseFilename=\&quot;favorites\&quot;/&gt;\n&lt;/$reveal&gt;\n\\end\n&lt;&lt;export-favorites&gt;&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager/folders&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager/folders&quot;,
+            &quot;caption&quot;: &quot;Folders&quot;,
+            &quot;created&quot;: &quot;20191226064442751&quot;,
+            &quot;modified&quot;: &quot;20200326083227048&quot;,
+            &quot;tags&quot;: &quot;$:/favorites/Manager&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\import $:/plugins/kookma/favorites/macros/definition\n\\define add() [[$(saveTitle)$]]\n\\define newtitle() $(folderpath)$-{{{[tag&lt;foldertagTid&gt;count[]add[1]addprefix[0000]split[]last[3]join[]]}}}\n\n\n\\define new-fav-folder()\n&lt;$edit-text tag=input tiddler=&lt;&lt;tempNewTid&gt;&gt; default=\&quot;\&quot; placeholder=\&quot;enter a folder name\&quot;/&gt;\n&lt;$list filter=\&quot;[&lt;tempNewTid&gt;get[text]!is[blank]]\&quot;&gt;\n&lt;$vars \n  folderName ={{{ [&lt;tempNewTid&gt;get[text]] }}} \n\tsaveTitle={{{[&lt;saveTid&gt;get[text]]}}} &gt;\n&lt;$wikify name=xtitle text=&lt;&lt;newtitle&gt;&gt; &gt;\t\n&lt;$button tooltip=\&quot;create new folder\&quot; class=\&quot;tc-btn-invisible\&quot;&gt;{{$:/core/images/new-button}}\n&lt;$action-createtiddler \n  $basetitle=&lt;&lt;xtitle&gt;&gt;\n\t$savetitle=&lt;&lt;saveTid&gt;&gt;\n\tcaption=&lt;&lt;folderName&gt;&gt;\n\ttags=&lt;&lt;foldertagTid&gt;&gt; /&gt;\n&lt;$action-listops $tiddler=&lt;&lt;foldertagTid&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;[&lt;saveTid&gt;get[text]]\&quot; /&gt;\n&lt;!-- clear edit-text temp tiddler--&gt;\n&lt;$action-setfield $tiddler=&lt;&lt;tempNewTid&gt;&gt; text=\&quot;\&quot;/&gt;\n&lt;/$button&gt;\n&lt;/$wikify&gt;\n&lt;/$vars&gt;\n&lt;/$list&gt;\n\\end\n\n\\define folder-reorder(listTid)\n&lt;$tiddler tiddler={{{ [&lt;tempreorderTid&gt;get[text]] }}} &gt;\n&lt;span style=\&quot;display:inline-block;min-width:120px;font-weight:700;\&quot;&gt;&lt;$view field=caption/&gt;&lt;/span&gt;\n\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;down\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;+[move&lt;currentTiddler&gt;]\&quot;/&gt;\n&lt;/$button&gt;\n&amp;nbsp;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;up\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;+[move:-1&lt;currentTiddler&gt;]\&quot;/&gt;\n&lt;/$button&gt;\n&amp;nbsp;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;putfirst\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;[&lt;currentTiddler&gt;]+[putfirst[]]\&quot;/&gt;\n&lt;/$button&gt;\n&amp;nbsp;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;putlast\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;+[putlast[]]\&quot;/&gt;\n&lt;/$button&gt;\n&amp;nbsp;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;sort downwards\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;+[sort[caption]]\&quot;/&gt;\n&lt;/$button&gt;\n&amp;nbsp;\n&lt;$button class=\&quot;tc-btn-invisible\&quot;&gt;sort upwards\n&lt;$action-listops $tiddler=\&quot;$listTid$\&quot; $field=\&quot;list\&quot; $subfilter=\&quot;+[!sort[caption]]\&quot;/&gt;\n&lt;/$button&gt;\n&lt;/$tiddler&gt;\n\\end\n\n\n\n\\define remove-all-favs()\n&lt;$button class=\&quot;tc-btn-invisible tc-btn-mini\&quot;  popup=&lt;&lt;qualify $(temppopupTid)$&gt;&gt; &gt;\nRemove all favorite items\n&lt;/$button&gt;\n&lt;$reveal state=&lt;&lt;qualify $(temppopupTid)$&gt;&gt; type=\&quot;popup\&quot; position=\&quot;belowleft\&quot; animate=\&quot;yes\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown-wrapper\&quot;&gt;\n&lt;div class=\&quot;tc-block-dropdown tc-edit-type-dropdown\&quot;&gt;\n&lt;div class=\&quot;tc-dropdown-item-plain\&quot;&gt;\n&lt;$set name=\&quot;resultCount\&quot; value=\&quot;\&quot;\&quot;&lt;$count filter=\&quot;[list&lt;favlistTid&gt;]\&quot;/&gt;\&quot;\&quot;\&quot;&gt;\nRemove all &lt;&lt;resultCount&gt;&gt; favorite item(s)?\n&lt;/$set&gt;\n&lt;/div&gt;\n&lt;div class=\&quot;tc-dropdown-item-plain\&quot;&gt;\n&lt;$button class=\&quot;tc-button tt-button\&quot;&gt; delete\n&lt;$list filter=\&quot;[&lt;favlistTid&gt;] [subfilter&lt;folders&gt;]\&quot;&gt;\n&lt;$action-setfield $tiddler=&lt;&lt;currentTiddler&gt;&gt; $field=\&quot;list\&quot; $value=\&quot;\&quot;/&gt;\n&lt;/$list&gt;  \n&lt;/$button&gt;\n&lt;/div&gt;\n&lt;/div&gt;\n&lt;/div&gt;\n&lt;/$reveal&gt;\n\\end\n\n\n&lt;!-- Create the UI ---&gt;\n\nCreate, rename, rearrange and delete folders\n\n!! Rearrange\n&lt;&lt;&lt;\nRearrange folder:&amp;nbsp;&lt;$macrocall $name=\&quot;folder-reorder\&quot; listTid=\&quot;$(foldertagTid)$\&quot; /&gt;\n&lt;&lt;&lt;\n\n!! Create\n&lt;&lt;&lt;\n&lt;div class=\&quot;fv-form\&quot;&gt;\n&lt;label&gt;Add new folder:&lt;/label&gt;&lt;&lt;new-fav-folder&gt;&gt;\n&lt;/div&gt;\n&lt;&lt;&lt;\n\n!! Structure\n&lt;&lt;&lt;\n&lt;$vars fv-config-buttons=yes&gt;\n&lt;$transclude tiddler=\&quot;$:/plugins/kookma/favorites/macros/sidebar\&quot; field=text/&gt;\n&lt;/$vars&gt;\n&lt;&lt;remove-all-favs&gt;&gt;\n&lt;&lt;&lt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager/search&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager/search&quot;,
+            &quot;caption&quot;: &quot;Search&quot;,
+            &quot;created&quot;: &quot;20191226092612349&quot;,
+            &quot;modified&quot;: &quot;20200326083227054&quot;,
+            &quot;tags&quot;: &quot;$:/favorites/Manager&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\import $:/plugins/kookma/favorites/macros/definition\n\\import $:/plugins/kookma/favorites/macros/combo-search\n\nSearch in favorites list (use filter or standard search)\n\n&lt;&lt;combo-search favorites&gt;&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/manager&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/manager&quot;,
+            &quot;created&quot;: &quot;20191224190957179&quot;,
+            &quot;modified&quot;: &quot;20200326083227025&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;&lt;tabs tabsList:\&quot;[all[tiddlers+shadows]tag[$:/favorites/Manager]!has[draft.of]!sort[caption]]\&quot; default:\&quot;$:/plugins/kookma/favorites/manager/search\&quot;&gt;&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/readme&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/readme&quot;,
+            &quot;created&quot;: &quot;20200326073607952&quot;,
+            &quot;modified&quot;: &quot;20200326082214810&quot;,
+            &quot;tags&quot;: &quot;&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;; Favorites\nA favorite item also called a bookmark is a shortcut, you are creating for quick access to it. You can access that bookmark at any time and view that as many times as you want without having to search and find it again.\n\n''Favorites plugin'' is a set of tool for creating favorites (bookmarks) in Tiddlywiki. Each favorite item is a shortcut to a tiddler.\n\nThe Favorites plugin contains three modes\n\n* ''flat mode'': one favorite list, no folder\n* ''structured mode'': use folder, search tool, export and delete tool\n* ''frozen list'': read only, simple table of content style\n\n;Code and demo\nFor learning plugin features, syntax, tutorial and examples see the plugin demo and code pages\n\n* Demo: https://kookma.github.io/TW-Favorites/\n* Code: https://github.com/kookma/TW-Favorites\n&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/recent&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/recent&quot;,
+            &quot;caption&quot;: &quot;Recently added&quot;,
+            &quot;created&quot;: &quot;20200103090757281&quot;,
+            &quot;creator&quot;: &quot;a revised version of Andrew Harrison favorite plugin&quot;,
+            &quot;list&quot;: &quot;$:/plugins/kookma/favorites/styles/image.css&quot;,
+            &quot;modified&quot;: &quot;20200326195945747&quot;,
+            &quot;modifier&quot;: &quot;a revised version of Andrew Harrison favorite plugin&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Favorites/Folder&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/sidebar-tab&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/sidebar-tab&quot;,
+            &quot;caption&quot;: &quot;Favorites&quot;,
+            &quot;created&quot;: &quot;20191226064836102&quot;,
+            &quot;list-after&quot;: &quot;$:/core/ui/SideBar/Open&quot;,
+            &quot;modified&quot;: &quot;20200326083227061&quot;,
+            &quot;tags&quot;: &quot;$:/tags/SideBar&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define show-options()\n&lt;$button class=\&quot;tc-btn-invisible\&quot; to=\&quot;$:/plugins/kookma/favorites/manager\&quot;&gt;\n{{$:/core/images/options-button}} Manager\n&lt;/$button&gt;\n\\end\n\n&lt;!-- create the sidebar tab --&gt;\n&lt;div class=\&quot;kk-favorites\&quot;&gt;\n --- &amp;nbsp; &lt;&lt;show-options&gt;&gt; &lt;br&gt;\n&lt;$transclude tiddler=\&quot;$:/plugins/kookma/favorites/macros/sidebar\&quot; field=text/&gt;\n&lt;/div&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/styles/image.css&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/styles/image.css&quot;,
+            &quot;button-color&quot;: &quot;#ff0000&quot;,
+            &quot;created&quot;: &quot;20200326140130064&quot;,
+            &quot;creator&quot;: &quot;a revised version of Andrew Harrison favorite plugin&quot;,
+            &quot;modified&quot;: &quot;20200326195938233&quot;,
+            &quot;modifier&quot;: &quot;a revised version of Andrew Harrison favorite plugin&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Stylesheet&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;.tc-tiddler-controls .notselected .tc-image-favorites-button {\n stroke:  #ccc;\n fill:    #ccc;\n}\n\n.tc-tiddler-controls .selected .tc-image-favorites-button {\n stroke: {{!!button-color}};\n fill:   {{!!button-color}};\n}\n\n&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/styles/style.css&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/styles/style.css&quot;,
+            &quot;text&quot;: &quot;.sd-input textarea:focus, .sd-input input:focus { outline: none;}\n.sd-input textarea, .sd-input input { border:none; border-bottom: 1px dotted gray; margin-left:0px; width:75%;}\n\n.kk-custom-drop-down .tc-drop-down{min-width:60px;}\n\n.kk-favorites svg{\n    fill:#aaaaaa;\n}\n.kk-favorites button:hover svg {\n    fill: #000000; \n}\n\n.kk-btn-mini svg { font-size: 0.7em; fill: #bbb; }\n\n/* in folding-editor*/\n.fv-folding-button button svg{\n\t font-size:0.8em;\n\t vertical-align: middle;\n}\n\n.fv-folding-button input[type=\&quot;radio\&quot;] {\n  width: 0.8em; !important;\n  height: 0.8em; !important;\n  vertical-align: middle !important;\n}\n\n/* form elements */\n.fv-form label  { display:inline-block; width:130px; margin-left:5px; }\n.fv-form input, .fv-form select { display:inline-block; width:320px;}\n&quot;,
+            &quot;created&quot;: &quot;20191219075310949&quot;,
+            &quot;modified&quot;: &quot;20200326185700659&quot;,
+            &quot;tags&quot;: &quot;$:/tags/Stylesheet&quot;,
+            &quot;type&quot;: &quot;text/css&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/templates/delete-item&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/templates/delete-item&quot;,
+            &quot;created&quot;: &quot;20191220075034126&quot;,
+            &quot;modified&quot;: &quot;20200326190524058&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;$button class=\&quot;tc-btn-invisible kk-btn-mini\&quot; tooltip=\&quot;remove item from favorites\&quot;&gt;\n{{$:/core/images/close-button}}\n&lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;-[&lt;currentTiddler&gt;]\&quot;/&gt;\n&lt;$action-listops $tiddler=&lt;&lt;folder&gt;&gt; $field=\&quot;list\&quot; $subfilter=\&quot;-[&lt;currentTiddler&gt;]\&quot;/&gt;\n&lt;/$button&gt;&amp;nbsp;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/templates/item&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/templates/item&quot;,
+            &quot;created&quot;: &quot;20191226214526038&quot;,
+            &quot;modified&quot;: &quot;20200326190524068&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define tooltip() contains $(cnt)$ items\n&lt;$vars cnt={{{[list&lt;currentTiddler&gt;count[]]}}}&gt;\n&lt;$link to=\&quot;rr\&quot; tooltip=&lt;&lt;cnt&gt;&gt; &gt;\n&lt;$view field=caption/&gt;\n&lt;/$link&gt;\n&lt;/$vars&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/templates/show-link&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/templates/show-link&quot;,
+            &quot;created&quot;: &quot;20191220074823880&quot;,
+            &quot;modified&quot;: &quot;20200326190524073&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;&lt;$link to={{!!title}} tooltip=&lt;&lt;currentTiddler&gt;&gt; &gt;\n&lt;$transclude field=\&quot;caption\&quot;&gt;\n&lt;$view field=\&quot;title\&quot; /&gt;\n&lt;/$transclude&gt;\n&lt;/$link&gt;&lt;br&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/ui/buttons/add-remove&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/ui/buttons/add-remove&quot;,
+            &quot;caption&quot;: &quot;{{$:/plugins/kookma/favorites/image}}{{$:/language/Buttons/Favorites/Caption/Add}}&quot;,
+            &quot;created&quot;: &quot;20181010141620348&quot;,
+            &quot;description&quot;: &quot;{{$:/language/Buttons/Favorites/Hint/Add}}&quot;,
+            &quot;list-after&quot;: &quot;$:/core/ui/Buttons/info&quot;,
+            &quot;modified&quot;: &quot;20200326193035070&quot;,
+            &quot;tags&quot;: &quot;$:/tags/ViewToolbar&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\whitespace trim\n\\import $:/plugins/kookma/favorites/macros/definition\n\n\\define add-this-tiddler() [[$(currentTiddler)$]]+[putfirst[]]\n\\define remove-this-tiddler() -[[$(currentTiddler)$]]\n\n\\define show-favorites-button(class)\n&lt;$list filter='[&lt;tv-config-toolbar-icons&gt;match[yes]]'&gt;\n&lt;span class=\&quot;$class$\&quot;&gt;{{$:/plugins/kookma/favorites/image}}&lt;/span&gt;\n&lt;/$list&gt;\n&lt;$list filter='[&lt;tv-config-toolbar-text&gt;match[yes]]'&gt;\n&lt;span class='tc-btn-text'&gt;&lt;$text text={{$:/language/Buttons/Favorites/Caption/Add}}/&gt;&lt;/span&gt;\n&lt;/$list&gt;\n\\end\n\n\n\\define add-to-favorites-button()\n &lt;$button \n   tooltip={{$:/language/Buttons/Favorites/Hint/Add}} aria-label={{$:/language/Buttons/Favorites/Caption/Add}} \n   class=&lt;&lt;tv-config-toolbar-class&gt;&gt;&gt;\n     &lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt;    $field='list'  $subfilter=&lt;&lt;add-this-tiddler&gt;&gt;/&gt;\n     &lt;$action-listops $tiddler=&lt;&lt;recentlyAdded&gt;&gt; $field='list'  $subfilter=&lt;&lt;add-this-tiddler&gt;&gt;/&gt;\n\t\t &lt;$macrocall $name=\&quot;show-favorites-button\&quot; class=\&quot;notselected\&quot;/&gt;\n &lt;/$button&gt;\n\\end \n\n\\define remove-from-favorites-button()\n &lt;$button \n   tooltip={{$:/language/Buttons/Favorites/Hint/Remove}} aria-label={{$:/language/Buttons/Favorites/Caption/Remove}} \n   class=&lt;&lt;tv-config-toolbar-class&gt;&gt; &gt;\n     &lt;$action-listops $tiddler=&lt;&lt;favlistTid&gt;&gt; $field='list' $subfilter=&lt;&lt;remove-this-tiddler&gt;&gt;/&gt;\n     &lt;$action-listops $tiddler={{{[subfilter&lt;folders&gt;contains&lt;currentTiddler&gt;limit[1]]}}} $field='list' $subfilter=&lt;&lt;remove-this-tiddler&gt;&gt;/&gt;\n\t\t &lt;$macrocall $name=\&quot;show-favorites-button\&quot; class=\&quot;selected\&quot;/&gt;\n &lt;/$button&gt;\n\\end \n\n&lt;$list filter=\&quot;[list&lt;favlistTid&gt;is[current]]\&quot;&gt;&lt;!-- tiddler is in favorites list, remove it   --&gt;\n&lt;&lt;remove-from-favorites-button&gt;&gt;\n&lt;/$list&gt;\n&lt;$list filter=\&quot;[all[current]!list&lt;favlistTid&gt;]\&quot;&gt;&lt;!-- tiddler is not in favorites list, add it --&gt;\n&lt;&lt;add-to-favorites-button&gt;&gt;\n&lt;/$list&gt;&quot;
+        },
+        &quot;$:/plugins/kookma/favorites/ui/ControlPanel/Settings&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/kookma/favorites/ui/ControlPanel/Settings&quot;,
+            &quot;caption&quot;: &quot;Favorites&quot;,
+            &quot;created&quot;: &quot;20191229193717073&quot;,
+            &quot;list-after&quot;: &quot;$:/core/ui/ControlPanel/Settings/TiddlyWiki&quot;,
+            &quot;modified&quot;: &quot;20200326191059735&quot;,
+            &quot;tags&quot;: &quot;$:/tags/ControlPanel/SettingsTab $:/tags/MoreSideBar&quot;,
+            &quot;type&quot;: &quot;text/vnd.tiddlywiki&quot;,
+            &quot;text&quot;: &quot;\\define checked-frozen()\n&lt;$action-setfield $tiddler=\&quot;$:/plugins/kookma/favorites/sidebar-tab\&quot; tags=\&quot;\&quot;/&gt;\n&lt;$action-setfield $tiddler=\&quot;$:/plugins/kookma/favorites/viewtoolbar\&quot; tags=\&quot;\&quot;/&gt; \n\\end\n\\define unchecked-frozen()\n&lt;$action-setfield $tiddler=\&quot;$:/plugins/kookma/favorites/sidebar-tab\&quot; tags=\&quot;$:/tags/SideBar\&quot;/&gt;\n&lt;$action-setfield $tiddler=\&quot;$:/plugins/kookma/favorites/viewtoolbar\&quot; tags=\&quot;$:/tags/ViewToolbar\&quot;/&gt; \n\\end\n\nThese settings let you customise the behaviour of Utility plugin.\n\n---\n\n;Show Utility setting in more sidebar\n:&lt;$checkbox tiddler=\&quot;$:/plugins/kookma/favorites/ui/ControlPanel/Settings\&quot; tag=\&quot;$:/tags/MoreSideBar\&quot;&gt; Show setting in more sidebar&lt;/$checkbox&gt;\n\n;Options\n:&lt;$checkbox checkactions=&lt;&lt;checked-frozen&gt;&gt; \n   tiddler=\&quot;$:/plugins/kookma/favorites/frozen-list\&quot; tag=\&quot;$:/tags/SideBar\&quot;\n\t checkactions=&lt;&lt;checked-frozen&gt;&gt;\n\t uncheckactions=&lt;&lt;unchecked-frozen&gt;&gt; &gt; Enable frozen tab&lt;/$checkbox&gt;\n:&lt;input type=\&quot;checkbox\&quot; disabled&gt; Viewtoolbar icon color &lt;$edit-text tiddler=\&quot;$:/plugins/kookma/favorites/styles/image.css\&quot; \n\tfield=\&quot;button-color\&quot; tag=\&quot;input\&quot; type=\&quot;color\&quot;/&gt;\n:&lt;$checkbox tiddler=\&quot;$:/plugins/kookma/favorites/styles/image.css\&quot; \n\t field=\&quot;button-color\&quot; checked=\&quot;#ff0000\&quot; unchecked=\&quot;#bbb\&quot;&gt; Reset viewtoolbar icon color&lt;/$checkbox&gt;&quot;
+        }
+    }
+}</pre>
 </div>
 <div author="Joao Bolila" dependents="" description="Highlight.js syntax highlighting" list="readme usage howto license" name="Highlight" plugin-type="plugin" title="$:/plugins/tiddlywiki/highlight" type="application/json" version="5.1.23">
 <pre>{
@@ -10553,29 +10891,32 @@ Error message and password prompt
 <div created="20201112214720665" creator="user" modified="20210304151017533" modifier="user" title="$:/SiteTitle">
 <pre>tiddlytask</pre>
 </div>
-<div created="20210201015607790" modified="20210201015607790" title="$:/state/advancedsearch/currentTab">
-<pre>$:/core/ui/AdvancedSearch/Filter</pre>
+<div created="20210201015607790" creator="user" modified="20210318234327921" modifier="user" title="$:/state/advancedsearch/currentTab">
+<pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
-<div created="20210118034554873" modified="20210118034554873" title="$:/state/showeditpreview">
+<div created="20210118034554873" creator="user" modified="20210305174542983" modifier="user" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
 <div created="20210126154220717" modified="20210126154220717" title="$:/state/ShowPaletteEditor">
 <pre>yes</pre>
 </div>
-<div created="20210201015607791" modified="20210201015607791" title="$:/state/tab--1498284803">
-<pre>$:/core/ui/AdvancedSearch/Filter</pre>
+<div created="20210317192141953" creator="user" modified="20210320154746315" modifier="user" title="$:/state/sidebar">
+<pre>yes</pre>
+</div>
+<div created="20210201015607791" creator="user" modified="20210318234327921" modifier="user" title="$:/state/tab--1498284803">
+<pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
 <div created="20210126154209893" modified="20210127000905359" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
 </div>
-<div created="20210115194926272" creator="user" modified="20210304154548055" modifier="user" title="$:/state/tab-1749438307">
+<div created="20210115194926272" creator="user" modified="20210320154749936" modifier="user" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Saving</pre>
 </div>
 <div created="20210115195113476" modified="20210116192140361" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20210115195813582" creator="user" modified="20210304154542296" modifier="user" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Open</pre>
+<div created="20210115195813582" creator="user" modified="20210318233929462" modifier="user" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210127000723467" modified="20210127000902974" title="$:/state/tabs/controlpanel/toolbars-1345989671">
 <pre>$:/core/ui/ControlPanel/Toolbars/EditToolbar</pre>
@@ -10586,8 +10927,11 @@ Error message and password prompt
 <div created="20210201132301785" creator="u" modified="20210201132302326" modifier="use" title="$:/status/UserName">
 <pre>user</pre>
 </div>
-<div created="20210304154545626" creator="user" list="$:/ControlPanel Home" modified="20210304154545626" modifier="user" title="$:/StoryList">
+<div created="20210320154747732" creator="user" list="$:/ControlPanel Home Kanban" modified="20210320154747732" modifier="user" title="$:/StoryList">
 <pre></pre>
+</div>
+<div created="20210305114140941" creator="user" modified="20210305114145733" modifier="user" tags="TW5" title="$:/tags/TextEditor/Snippet">
+<pre>{{||LTg}}</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
 <pre>{
@@ -10707,13 +11051,158 @@ Error message and password prompt
 <div created="20201129043801427" modified="20201129043801427" title="$:/view">
 <pre>classic</pre>
 </div>
-<div color="#e8aa0c" created="20201112223829885" icon="$:/core/images/refresh-button" modified="20210126235815931" tags="tags" title="doing">
-<pre>&lt;$transclude tiddler=&quot;LTg&quot;/&gt;</pre>
+<div created="20210305112557302" creator="user" modified="20210305121536194" modifier="user" tags="todo" title="Add preview &amp; drag/drop to kanban">
+<pre>&lt;&lt;task-control&gt;&gt;
+see
+
+* https://reidgould.github.io/tiddlywiki-dropboard/#Drag%20n'%20Drop%20In%20Style</pre>
 </div>
-<div color="#25ff06" created="20201112223833845" icon="$:/core/images/done-button" modified="20210126235832614" tags="tags" title="done">
-<pre>&lt;$transclude tiddler=&quot;LTg&quot;/&gt;</pre>
+<div created="20210305120232838" creator="user" modified="20210305132745736" modifier="user" tags="TW5" title="Button New Task">
+<pre>&lt;$wikify name=&quot;content&quot; text='
+```
+&lt;&lt;task-control&gt;&gt;
+&lt;&lt;&lt;
+Task description
+&lt;&lt;&lt;
+```
+&lt;&lt;now &quot;DDth, MMM YYYY&quot;&gt;&gt;
+'
+output=&quot;text&quot;&gt;
+&lt;$button class=&quot;button-new-task&quot;&gt;
+&lt;$action-sendmessage $message=&quot;tm-new-tiddler&quot; title=&quot;&quot; tags=&quot;todo&quot; text=&lt;&lt;content&gt;&gt;
+
+/&gt;
+New Task
+&lt;/$button&gt;
+&lt;/$wikify&gt;</pre>
 </div>
-<div created="20201112222311414" creator="user" modified="20210304151439321" modifier="user" title="Home">
+<div created="20210303210656341" creator="user" modified="20210305113452681" modifier="user" tags="task-control $:/tags/Stylesheet TW5 Tiddlytask" title="Custom Checkbox Style" type="text/css">
+<pre>.custom-checkbox.todo-color &gt; input[type=&quot;checkbox&quot;]:checked + * {
+  color:  rgb(var(--tiddlytask-todo-color-rgb));
+  fill: rgb(var(--tiddlytask-todo-color-rgb));
+}
+
+.custom-checkbox.doing-color &gt; input[type=&quot;checkbox&quot;]:checked + * {
+  color:  rgb(var(--tiddlytask-doing-color-rgb));
+  fill: rgb(var(--tiddlytask-doing-color-rgb));
+}
+
+.custom-checkbox.done-color &gt; input[type=&quot;checkbox&quot;]:checked + * {
+  color:  rgb(var(--tiddlytask-done-color-rgb));
+  fill: rgb(var(--tiddlytask-done-color-rgb));
+}
+
+
+.custom-checkbox {
+  display: inline-flex;
+  position: relative;
+
+  /*Do not use CSS variables if IE must be supported*/
+  --size: 20px;
+  --colorRgb: 0, 0, 0;
+  overflow: hidden;
+  /*prevent the input from overflowing the label*/
+
+  border-radius: inherit;
+  color: rgb(var(--colorRgb));
+  border: solid rgb(var(--colorRgb)) calc(var(--size) / 7);
+  cursor: pointer;
+}
+
+.custom-checkbox-round-corner,
+.custom-checkbox-round-corner &gt; input[type=&quot;checkbox&quot;] {
+  border-radius: calc(var(--size) / 4);
+}
+
+.custom-checkbox &gt; input[type=&quot;checkbox&quot;] {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.custom-checkbox &gt; input[type=&quot;checkbox&quot;] + * {
+  box-sizing: border-box;
+  width: var(--size);
+  height: var(--size);
+  font-size: calc(var(--size) / 2);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-checkbox &gt; input[type=&quot;checkbox&quot;] + *::selection {
+  /* prevent highliting the text within the custom checkbox */
+  background: none;
+}
+
+/* Pas d'image dans le span (defaut) */
+
+.custom-checkbox &gt; input[type=&quot;checkbox&quot;]:not(:checked) + *:after {
+    content: &quot;\2716\FE0E&quot;;
+    font-family: Segoe UI Symbol;
+}
+
+.custom-checkbox &gt; input[type=&quot;checkbox&quot;]:checked + *:after {
+  content: &quot;\2714\FE0E&quot;;
+  font-family: Segoe UI Symbol;
+}
+
+/* Une image se trouve dans le span*/
+/* reset de l'image par défaut */
+.custom-checkbox-with-inline-img
+  &gt; input[type=&quot;checkbox&quot;]:not(:checked)
+  + *:after,
+.custom-checkbox-with-inline-img &gt; input[type=&quot;checkbox&quot;]:checked + *:after {
+  content: &quot;&quot;;
+}
+
+
+/* Enlever les bordures */
+.custom-checkbox-without-border,.custom-checkbox-with-inline-img {
+    border: unset;
+}
+
+
+/* mise en page de l'image contenue */
+.custom-checkbox-with-inline-img &gt; input[type=&quot;checkbox&quot;] + *&gt;* {
+  width: 100%;
+  height: 100%;
+}
+
+.custom-checkbox-with-inline-img &gt; input[type=&quot;checkbox&quot;]:not(:checked) + *&gt;* {
+  opacity: 0.2;
+}
+
+.custom-checkbox-with-inline-img &gt; input[type=&quot;checkbox&quot;]:checked + *&gt;* {
+  opacity: 1;
+}
+</pre>
+</div>
+<div color="#e8aa0c" created="20201112223829885" creator="user" icon="$:/core/images/refresh-button" modified="20210305114112732" modifier="user" tags="tags" title="doing">
+<pre>{{||LTg}}</pre>
+</div>
+<div color="#25ff06" created="20201112223833845" creator="user" icon="$:/core/images/done-button" modified="20210305114123786" modifier="user" tags="tags" title="done">
+<pre>{{||LTg}}</pre>
+</div>
+<div created="20210303170235551" creator="user" list="" modified="20210305113700605" modifier="user" tags="TW5 done task-control" title="exemple task-control">
+<pre>&lt;&lt;task-control&gt;&gt;
+
+!Sous tâches
+
+[ ] 2
+[ ] 3
+[x] test
+[x] 4
+[x] 1</pre>
+</div>
+<div created="20201112222311414" creator="user" modified="20210315153101048" modifier="user" title="Home">
 <pre>^^{{stats}}^^
 
 Welcome on [[tiddlytask.github.io|https://tiddlytask.github.io]]! Here you will find various tools to create and manage tasks with TW5.
@@ -10740,10 +11229,11 @@ This wiki is powered by &lt;a href=&quot;https://tiddlywiki.com/&quot; target=&q
 
 &lt;a role=&quot;info&quot; href=&quot;mailto:user@gmail.com&quot; class=&quot;contact&quot;&gt;&lt;span class=&quot;wave&quot;&gt;&amp;#128075;&lt;/span&gt;tiddlytask@gmail.com&lt;/a&gt;  </pre>
 </div>
-<div created="20201112223028343" modified="20201112224024469" title="Kanban">
+<div created="20201112223028343" creator="user" modified="20210305132212959" modifier="user" title="Kanban">
 <pre>&lt;div class=&quot;container&quot;&gt;
 &lt;p class=&quot;todo&quot;&gt;
-&lt;strong&gt;To do&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;To do&lt;/strong&gt;
+&lt;br&gt;
 {{todo}}
 &lt;/p&gt;
 &lt;p class=&quot;doing&quot;&gt;
@@ -10770,13 +11260,53 @@ subfilter=&quot;!has[draft.of]![Home]![Latest changes]!tag[TW5]!tag[todo]!tag[do
 &lt;$list filter=&quot;[!is[system]has[modified]!sort[modified]limit[5]]&quot; /&gt;
 --&gt;</pre>
 </div>
-<div created="20201112223858912" modified="20210126151150276" tags="TW5" title="LTg">
+<div created="20201112223858912" creator="user" modified="20210305115508641" modifier="user" tags="TW5" title="LTg">
 <pre>&lt;&lt;list-links &quot;[all[current]tagging[]sort[title]]&quot;&gt;&gt;</pre>
 </div>
 <div created="20210126151429269" modified="20210129152938044" tags="TW5" title="LTg#">
 <pre>&lt;ul&gt;
 &lt;$list filter=&quot;[all[current]tagging[]sort[title]]&quot;&gt;
 &lt;$link&gt;&lt;li&gt;&lt;span&gt;&lt;$view field=&quot;title&quot;/&gt; (&lt;$count filter=&quot;[all[current]tagging[]]&quot;/&gt;)&lt;/span&gt;&lt;/li&gt;</pre>
+</div>
+<div created="20210303170551362" creator="user" list="" modified="20210305174546948" modifier="user" tags="task-control TW5 $:/tags/Macro" title="macro task-control">
+<pre>\define todo-task-control()
+&lt;$action-listops $tags=&quot;+[!remove:[doing done]] todo&quot;/&gt;
+
+\end
+
+\define doing-task-control()
+&lt;$action-listops $tags=&quot;+[!remove:[todo done]] doing&quot;/&gt;
+
+\end
+
+\define done-task-control()
+&lt;$action-listops $tags=&quot;+[!remove:[doing todo]] done&quot;/&gt;
+
+\end
+
+\define remove-tag-task-control()
+&lt;$action-listops $tags=&quot;+[!remove:[todo doing done]]&quot;/&gt;
+
+\end
+
+\define task-control()
+
+&lt;$checkbox class=&quot;custom-checkbox custom-checkbox-with-inline-img todo-color&quot; tag=&quot;todo&quot; actions=&lt;&lt;todo-task-control&gt;&gt; uncheckactions=&lt;&lt;remove-tag-task-control&gt;&gt;&gt;
+{{$:/core/images/close-others-button}}
+&lt;/$checkbox&gt;
+&lt;$checkbox class=&quot;custom-checkbox custom-checkbox-with-inline-img doing-color&quot; tag=&quot;doing&quot;  title=&quot;doing&quot; actions=&lt;&lt;doing-task-control&gt;&gt; uncheckactions=&lt;&lt;remove-tag-task-control&gt;&gt;&gt;
+{{$:/core/images/refresh-button}}
+&lt;/$checkbox&gt;
+&lt;$checkbox class=&quot;custom-checkbox custom-checkbox-with-inline-img done-color&quot; tag=&quot;done&quot;  title=&quot;done&quot; actions=&lt;&lt;done-task-control&gt;&gt; uncheckactions=&lt;&lt;remove-tag-task-control&gt;&gt;&gt;
+{{$:/core/images/done-button}}
+&lt;/$checkbox&gt;
+
+\end
+
+
+&lt;!--
+To trigger save : &lt;$action-sendmessage $message=&quot;tm-auto-save-wiki&quot;/&gt;
+ --&gt;</pre>
 </div>
 <div created="20210126233747211" creator="user" modified="20210201133214932" modifier="user" tags="help" title="Q&amp;A">
 <pre>;I downloaded this wiki, how do I delete the curated entries to only add my own ?
@@ -10799,6 +11329,40 @@ subfilter=&quot;!has[draft.of]![Home]![Latest changes]!tag[TW5]!tag[todo]!tag[do
 <pre>&lt;div class=&quot;nicelist&quot;&gt;
 &lt;$transclude tiddler=&quot;LTg#&quot;/&gt;
 </pre>
+</div>
+<div created="20210305131808216" creator="user" modified="20210305133511567" modifier="user" tags="$:/tags/Stylesheet Tiddlytask" title="Style Buttons" type="text/css">
+<pre>.button-new-task {
+display:block;
+background:unset;
+border:unset;
+
+border:solid 2px rgb(128, 128, 128);
+border-radius: 4px;
+padding: 3px;
+margin: 2px 0 2px 4px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.button-append-to-end-of-list{
+position:relative;
+}
+
+.button-append-to-end-of-list&gt;.button-new-task{
+position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.button-append-to-end-of-list&gt;.button-new-task *:after{
+content:&quot;+&quot;;
+}</pre>
 </div>
 <div created="20210126155534216" modified="20210129154220121" tags="$:/tags/Stylesheet TW5" title="Style Dark mode" type="text/css">
 <pre>a, .nicelist ul li span {
@@ -11040,7 +11604,7 @@ margin: 0;
 text-align:left;
 }</pre>
 </div>
-<div created="20210304151621473" creator="user" modified="20210304152247631" modifier="user" tags="$:/tags/Stylesheet TW5 Tiddlytask" title="Style Tiddlytask Color Palettes" type="text/css">
+<div created="20210304151621473" creator="user" modified="20210305114858057" modifier="user" tags="$:/tags/Stylesheet TW5 Tiddlytask" title="Style Tiddlytask Color Palette" type="text/css">
 <pre>:root{
 --tiddlytask-todo-color-rgb:255, 0, 0;
 --tiddlytask-doing-color-rgb:232, 170, 12;
@@ -11076,11 +11640,30 @@ position: absolute;
 <pre>&lt;div class=&quot;nicelist&quot;&gt;
 &lt;$transclude tiddler=&quot;LTg#&quot;/&gt;</pre>
 </div>
-<div created="20210101192728514" creator="user" modified="20210201133959996" modifier="user" tags="TW5 todo" title="Templates">
-<pre></pre>
-</div>
-<div color="#ff0000" created="20201112223824226" icon="$:/core/images/close-others-button" modified="20210127000044782" tags="tags" title="todo">
+<div created="20210304002738074" creator="user" modified="20210305113045270" modifier="user" tags="Tiddlytask" title="task-control">
 <pre>&lt;$transclude tiddler=&quot;LTg&quot;/&gt;</pre>
+</div>
+<div caption="task-control" created="20210303171128800" creator="user" list="" modified="20210305113129075" modifier="user" tags="$:/tags/TextEditor/Snippet Tiddlytask task-control" title="task-control snippet">
+<pre>&lt;&lt;task-control&gt;&gt;</pre>
+</div>
+<div created="20210101192728514" creator="user" modified="20210305111927521" modifier="user" tags="TW5" title="Templates">
+<pre>New task</pre>
+</div>
+<div created="20210317192146138" creator="user" modified="20210317192211833" modifier="user" tags="" title="Test date">
+<pre>''There are &lt;&lt;DaysToDate &quot;4/21/2016&quot;&gt;&gt; days until the release of Ubuntu 16.04 LTS (Xenial Xerus).''</pre>
+</div>
+<div created="20210305114535810" creator="user" modified="20210305114617609" modifier="user" tags="" title="tests : tag in tiddler body">
+<pre>{{todo||$:/core/ui/TagTemplate}} see $:/core/ui/TagTemplate</pre>
+</div>
+<div created="20210305115105508" creator="user" modified="20210305115304789" modifier="user" tags="TW5" title="Tg">
+<pre>{{{ [all[current]tagging[]sort[title]] }}}</pre>
+</div>
+<div created="20210315152923017" creator="user" modified="20210315152932665" modifier="user" title="Tiddlytask">
+<pre>{{||LTg}}</pre>
+</div>
+<div color="#ff0000" created="20201112223824226" creator="user" icon="$:/core/images/close-others-button" modified="20210305133457965" modifier="user" tags="tags" title="todo">
+<pre>{{||LTg}}
+&lt;span class=&quot;button-append-to-end-of-list&quot;&gt;&lt;$transclude tiddler=&quot;Button New Task&quot;/&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;</pre>
 </div>
 <div created="20210129152821971" modified="20210129153535901" tags="TW5" title="TW5">
 <pre>&lt;&lt;list-links &quot;[all[current]tagging[]![TW5]sort[title]]&quot;&gt;&gt;</pre>
